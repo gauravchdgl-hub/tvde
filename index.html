@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quiz TVDE</title>
+<style>
+:root{
+  --bg:#0d4f91; --bg2:#0a3d73; --card:#ffffff; --text:#13263d; --muted:#5c6b7d;
+  --accent:#1d6fd6; --accent2:#155bb5; --correct:#16a34a; --wrong:#dc2626;
+  --border:#dbe4f0; --yellow:#ffc531; --yellow2:#f5a623; --orange:#e8742c;
+  color-scheme: light dark;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; color:var(--text);
+  background-color:#0a3d73;
+  background-image:
+    linear-gradient(180deg,rgba(9,40,77,.88),rgba(9,35,68,.94)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='600' viewBox='0 0 900 600'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%231c6fc9'/%3E%3Cstop offset='1' stop-color='%230a3d73'/%3E%3C/linearGradient%3E%3ClinearGradient id='road' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%232b3442'/%3E%3Cstop offset='1' stop-color='%23161c24'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='900' height='600' fill='url(%23sky)'/%3E%3Ccircle cx='760' cy='110' r='70' fill='%23ffc531' fill-opacity='0.18'/%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Ccircle cx='120' cy='80' r='3'/%3E%3Ccircle cx='260' cy='150' r='2'/%3E%3Ccircle cx='500' cy='60' r='3'/%3E%3Ccircle cx='620' cy='180' r='2'/%3E%3Ccircle cx='830' cy='260' r='3'/%3E%3C/g%3E%3Cpolygon points='0,600 900,600 900,340 620,300 500,290 0,330' fill='%23294a6b' fill-opacity='0.35'/%3E%3Cpolygon points='450,330 630,330 900,600 0,600' fill='url(%23road)'/%3E%3Cg fill='%23ffc531' fill-opacity='0.85'%3E%3Cpolygon points='442,372 458,372 452,398 448,398'/%3E%3Cpolygon points='418,432 438,432 430,466 422,466'/%3E%3Cpolygon points='386,512 414,512 402,556 392,556'/%3E%3C/g%3E%3Cg fill='%23e9eef5' fill-opacity='0.55'%3E%3Crect x='452' y='330' width='7' height='270'/%3E%3Crect x='441' y='330' width='7' height='270'/%3E%3C/g%3E%3Cg transform='translate(560,470)' opacity='0.9'%3E%3Crect x='-70' y='-18' width='150' height='34' rx='10' fill='%231c2430'/%3E%3Crect x='-50' y='-34' width='95' height='26' rx='8' fill='%232a3444'/%3E%3Ccircle cx='-42' cy='18' r='17' fill='%230d1117'/%3E%3Ccircle cx='55' cy='18' r='17' fill='%230d1117'/%3E%3Ccircle cx='-42' cy='18' r='6' fill='%23555'/%3E%3Ccircle cx='55' cy='18' r='6' fill='%23555'/%3E%3Crect x='-66' y='-10' width='18' height='10' rx='2' fill='%23ffd34d'/%3E%3C/g%3E%3Cg transform='translate(250,250)' opacity='0.35'%3E%3Ccircle r='40' fill='none' stroke='%23ffffff' stroke-width='6'/%3E%3Ccircle r='7' fill='%23ffffff'/%3E%3Cline x1='0' y1='-40' x2='0' y2='-12' stroke='%23ffffff' stroke-width='6'/%3E%3Cline x1='34' y1='20' x2='12' y2='8' stroke='%23ffffff' stroke-width='6'/%3E%3Cline x1='-34' y1='20' x2='-12' y2='8' stroke='%23ffffff' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:cover,cover;
+  background-position:center,center;
+  background-repeat:no-repeat,no-repeat;
+  background-attachment:fixed,fixed;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  min-height:100vh;
+}
+.wrap{max-width:720px;margin:0 auto;padding:18px 12px 70px;min-height:100vh;display:flex;flex-direction:column;}
+.centerwrap{flex:1;display:flex;flex-direction:column;justify-content:center;width:100%;}
+h1{font-size:1.3rem;margin:0 0 4px;color:#fff;}
+.sub{color:#cfe0f5;margin:0 0 18px;font-size:.88rem;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:0;margin-bottom:14px;box-shadow:0 4px 14px rgba(0,0,0,.25);overflow:hidden;}
+.card-pad{padding:18px;}
+input[type=password],input[type=text]{
+  width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--border);
+  background:#f4f7fb;color:var(--text);font-size:1rem;margin:10px 0;
+}
+button{
+  background:var(--accent);color:#fff;border:none;border-radius:10px;
+  padding:13px 18px;font-size:1rem;font-weight:700;cursor:pointer;width:100%;flex:1;
+  box-shadow:0 2px 6px rgba(0,0,0,.2);
+}
+button:hover{background:var(--accent2);}
+button.secondary{background:transparent;color:#fff;border:1px solid #fff;box-shadow:none;}
+button.nav-prev{background:var(--orange);}
+button.nav-next{background:var(--accent);}
+button:disabled{opacity:.4;cursor:not-allowed;}
+.err{color:#ffd6d6;font-size:.85rem;min-height:18px;}
+.modgrid{display:grid;gap:14px;}
+.modbtn{
+  background:var(--card);border:none;border-radius:16px;padding:20px;
+  text-align:left;cursor:pointer;color:var(--text);box-shadow:0 4px 14px rgba(0,0,0,.25);
+  border-left:8px solid var(--yellow);
+}
+.modbtn b{display:block;font-size:1.1rem;margin-bottom:4px;}
+.modbtn span{color:var(--muted);font-size:.85rem;}
+
+/* question header: image + number badge like driving-exam UI */
+.qhead{display:flex;min-height:190px;}
+.qimgwrap{width:46%;background:#000;line-height:0;flex-shrink:0;}
+.qimg{width:100%;height:100%;object-fit:cover;display:block;}
+.qhead-noimg .qimgwrap{display:none;}
+.qtextcol{flex:1;background:var(--accent);color:#fff;padding:14px 14px;position:relative;display:flex;flex-direction:column;justify-content:center;min-height:190px;}
+.qhead-noimg .qtextcol{background:var(--accent2);min-height:190px;}
+.qbadge{
+  position:absolute; top:10px; right:10px; background:var(--yellow);
+  color:#5c3b00; font-weight:800; font-size:1.4rem; width:52px;height:52px;
+  border-radius:50%; display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 8px rgba(0,0,0,.35); border:3px solid #fff; z-index:5;
+}
+.qtext{font-weight:600;margin:0;line-height:1.35;font-size:.95rem;padding-right:28px;}
+.opts{padding:4px 0;}
+.opt{
+  display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);
+  padding:12px 16px;cursor:pointer;background:var(--card);
+}
+.opt:last-child{border-bottom:none;}
+.opt:hover{background:#f2f6fc;}
+.opt input{display:none;}
+.optletter{
+  width:26px;height:26px;border-radius:6px;background:#e7edf7;color:var(--accent2);
+  font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.opt.selected{background:#e8f0fe;}
+.opt.selected .optletter{background:var(--accent);color:#fff;}
+.checkbox{
+  width:24px;height:24px;border-radius:6px;border:2px solid #b9c6da;background:#fff;
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-left:auto;
+}
+.opt.selected .checkbox{background:var(--correct);border-color:var(--correct);}
+.checkbox svg{display:none;width:15px;height:15px;}
+.opt.selected .checkbox svg{display:block;}
+.opt.correct{background:rgba(22,163,74,.12);}
+.opt.correct .optletter{background:var(--correct);color:#fff;}
+.opt.wrong{background:rgba(220,38,38,.12);}
+.opt.wrong .optletter{background:var(--wrong);color:#fff;}
+.badge{font-size:.72rem;font-weight:700;margin-left:auto;white-space:nowrap;}
+.badge.ok{color:var(--correct);}
+.badge.bad{color:var(--wrong);}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.topbar a, .back{color:#ffd54a;text-decoration:none;font-size:.9rem;cursor:pointer;font-weight:600;}
+.scorebox{text-align:center;padding:26px 20px;}
+.scorebox .big{font-size:2.6rem;font-weight:800;color:var(--accent);}
+.navrow{display:flex;gap:8px;margin-bottom:10px;}
+.qgrid{
+  display:flex;flex-wrap:wrap;gap:6px;background:rgba(255,255,255,.08);
+  border-radius:12px;padding:10px;margin-bottom:12px;
+}
+.qgridbtn{
+  width:30px;height:30px;border-radius:7px;border:none;flex:none;
+  background:#e7edf7;color:var(--accent2);font-weight:700;font-size:.75rem;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:none;padding:0;
+}
+.qgridbtn.current{background:var(--yellow);color:#5c3b00;}
+.qgridbtn.answered{background:var(--accent);color:#fff;}
+.qgridbtn:hover{background:var(--yellow);color:#5c3b00;}
+#hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+const MODULES = [
+  [{"n": "1", "q": "Nesta situação se pretender ultrapassar com segurança, devo:", "opts": ["Iniciar de imediato a manobra.", "Verificar pelos espelhos retrovisores se outro condutor já iniciou a manobra.", "Fazer sinais de luzes e iniciar de imediato a manobra."], "c": 1, "img": "images/1.jpg"}, {"n": "2", "q": "Qual deve ser o comportamento do veículo que está a ser ultrapassado?", "opts": ["Parar.", "Manter a velocidade.", "Diminuir a velocidade."], "c": 2, "img": "images/2.jpg"}, {"n": "3", "q": "O sinal indica:", "opts": ["A existência de uma passagem inferior.", "A existência de um túnel.", "O fim de um túnel."], "c": 1, "img": "images/3.jpg"}, {"n": "4", "q": "Atendendo a que nenhum dos veículos que se encontra neste cruzamento pretende mudar de direcção, qual o veículo que passa em primeiro lugar?", "opts": ["O veículo de cor preta.", "O veículo cinzento.", "O meu veículo."], "c": 1, "img": "images/4.jpg"}, {"n": "107", "q": "Perante este sinal devo:", "opts": ["Avançar em primeiro lugar.", "Ceder a passagem."], "c": 1, "img": "images/107.jpg"}, {"n": "199", "q": "O exame primário da vítima consiste na:", "opts": ["Observação do diâmetro das pupilas, da coloração, temperatura e grau de humidade da pele.", "Verificação em primeiro lugar da existência de ventilação.", "Avaliação em primeiro lugar da existência de pulsação.", "Avaliação em primeiro lugar do estado de consciência da vítima"], "c": 3, "img": "images/1.jpg"}, {"n": "215", "q": "Em caso de acidente com a sua viatura, qual o procedimento que não deve ser adoptado:", "opts": ["Manter a calma", "Avaliar a segurança do local", "Efetuar uma rápida avaliação da vítima", "Abandonar o local"], "c": 3, "img": "images/2.jpg"}, {"n": "223", "q": "O primeiro contacto com o motorista ajuda a criar uma boa impressão sobre o serviço.", "opts": ["Verdadeiro", "Falso"], "c": 0, "img": "images/3.jpg"}, {"n": "224", "q": "O processo de comunicação requer, no mínimo:", "opts": ["Um emissor.", "Um recetor.", "Um emissor e um recetor."], "c": 2, "img": "images/4.jpg"}, {"n": "225", "q": "Como agir com um passageiro impaciente ou agressivo?", "opts": ["Responder com a mesma agressividade.", "Manter a calma, ser cordial e evitar o conflito.", "Ignorar o passageiro e continuar a viagem."], "c": 1, "img": "images/107.jpg"}, {"n": "226", "q": "O que é o &#x27;ruído&#x27; na comunicação?", "opts": ["Uma conversa entre duas pessoas.", "Algo que dificulta a compreensão da mensagem.", "O som do rádio."], "c": 1, "img": null}, {"n": "227", "q": "O que é a comunicação verbal?", "opts": ["Usar gestos e sinais para comunicar.", "Falar ou escrever para transmitir uma mensagem.", "Ficar em silêncio."], "c": 1, "img": null}, {"n": "228", "q": "Uma das funções importantes da comunicação é transmitir conhecimento.", "opts": ["Verdadeiro", "Falso"], "c": 0, "img": null}, {"n": "229", "q": "Um motorista deve comportar-se de forma?", "opts": ["Agressiva.", "Passiva.", "Assertiva."], "c": 2, "img": null}, {"n": "230", "q": "Quando se pode dizer que a comunicação tem sucesso?", "opts": ["Quando se fala muito rápido.", "Quando a mensagem é compreendida.", "Quando ninguém responde."], "c": 1, "img": null}, {"n": "231", "q": "Chamamos feedback:", "opts": ["À resposta ou reação da pessoa à mensagem.", "Ao início de uma conversa.", "À forma como utilizamos o tom de voz."], "c": 0, "img": null}, {"n": "232", "q": "Um motorista tem um comportamento profissional quando:", "opts": ["É apressado e impaciente durante a condução.", "Ignora os pedidos dos passageiros.", "É educado, respeita os passageiros e atende às suas necessidades."], "c": 2, "img": null}, {"n": "233", "q": "Qual a importância do tom de voz na comunicação?", "opts": ["Ajuda a transmitir a mensagem de forma clara.", "Dificulta a compreensão da mensagem."], "c": 0, "img": null}, {"n": "234", "q": "Na comunicação com os passageiros é importante:", "opts": ["Fazer perguntas durante toda a conversa", "Ouvir para compreender.", "Falar rapidamente para terminar a conversa."], "c": 1, "img": null}, {"n": "235", "q": "Quando é permitido ultrapassar pela direita?", "opts": ["Quando o veículo da frente circula lentamente.", "Quando o veículo da frente sinaliza que vai virar à esquerda.", "Em qualquer situação"], "c": 1, "img": null}, {"n": "236", "q": "O que deve fazer antes de iniciar uma ultrapassagem?", "opts": ["Verificar se há espaço suficiente e visibilidade.", "Aumentar a velocidade.", "Aproximar-se ao máximo do veículo da frente."], "c": 0, "img": null}, {"n": "237", "q": "É permitido ultrapassar em curvas com visibilidade reduzida?", "opts": ["Sim, é permitido.", "É proibido ultrapassar em curvas com visibilidade reduzida.", "Passar rapidamente antes que outro veículo chegue."], "c": 1, "img": null}, {"n": "238", "q": "Numa ultrapassagem, o motorista deve voltar à sua via de trânsito:", "opts": ["Após aumentar a velocidade.", "Logo após concluir a manobra.", "Assim que o veículo ultrapassado fique visível no retrovisor."], "c": 1, "img": null}, {"n": "239", "q": "É proibido ultrapassar:", "opts": ["Em lombas ou cruzamentos sem visibilidade.", "Quando o veículo é lento.", "Em autoestradas."], "c": 0, "img": null}, {"n": "240", "q": "Ao ultrapassar uma bicicleta, deve manter uma distância mínima lateral?", "opts": ["Sim, de 1,5 metros.", "Sim, de 1 metro", "Não."], "c": 0, "img": null}, {"n": "241", "q": "Este sinal significa que os automóveis pesados estão proibidos de ultrapassar.", "opts": ["Sim", "Não."], "c": 0, "img": "images/241.jpg"}, {"n": "242", "q": "O sinal de mudança de direção para a esquerda, do veículo que segue à frente, pode indicar:", "opts": ["Diminuição de velocidade.", "Início de manobra de marcha atrás.", "Início de uma ultrapassagem."], "c": 2, "img": "images/242.jpg"}, {"n": "243", "q": "Pode ultrapassar o veículo que circula à frente?", "opts": ["Sim, a manobra é permitida.", "Não, devo aguardar que o veículo termine a manobra."], "c": 1, "img": "images/243.jpg"}, {"n": "244", "q": "Pode ultrapassar o veículo à sua frente?", "opts": ["Sim.", "Não."], "c": 1, "img": "images/244.jpg"}, {"n": "245", "q": "É permitido ultrapassar neste local?", "opts": ["Sim.", "Não."], "c": 1, "img": "images/245.jpg"}],
+  [{"n": "246", "q": "O motociclo que transita na rotunda deve:", "opts": ["Reduzir a velocidade e avançar sem parar.", "Avançar em primeiro lugar, porque tem prioridade de passagem.", "Ceder passagem aos veículos que já circulam na rotunda."], "c": 1, "img": "images/246.jpg"}, {"n": "247", "q": "Ao entrar numa rotunda deve:", "opts": ["Reduzir a velocidade e avançar sem parar.", "Avançar em primeiro lugar, porque tem prioridade de passagem.", "Ceder passagem aos veículos que já circulam na rotunda."], "c": 2, "img": "images/247.jpg"}, {"n": "248", "q": "O motorista deve sinalizar a saída de uma rotunda:", "opts": ["Ao aproximar-se da saída.", "Não é necessário sinalizar.", "Apenas se houver trânsito intenso."], "c": 0, "img": null}, {"n": "249", "q": "Para mudar de via de circulação dentro de uma rotunda, o motorista deve:", "opts": ["Mudar de via sem sinalizar.", "Sinalizar e garantir que a manobra é segura.", "Mudar rapidamente para sair mais depressa."], "c": 1, "img": null}, {"n": "250", "q": "Ao circular numa rotunda, o motorista deve saber que:", "opts": ["Todos os veículos entram ao mesmo tempo.", "Os veículos em serviço de urgência devem ceder a passagem aos veículos que circulam na rotunda.", "Deve ceder a passagem aos veículos em serviço de urgência que entram na rotunda."], "c": 2, "img": null}, {"n": "251", "q": "Em rotundas, pode circular na via mais à direita:", "opts": ["Apenas para sair na primeira saída.", "Sempre, independentemente da saída."], "c": 0, "img": null}, {"n": "252", "q": "O que deve fazer nesta situação?", "opts": ["Ceder a passagem ao veículo cinzento.", "Avançar em primeiro lugar, por se apresentar pela direita.", "Parar obrigatoriamente, porque pretendo entrar na rotunda."], "c": 0, "img": "images/252.jpg"}, {"n": "253", "q": "O condutor da bicicleta deve ceder a passagem?", "opts": ["Sim, porque a bicicleta se apresenta pela esquerda.", "Não, porque a bicicleta circula na rotunda.", "Apenas se houver veículos à sua frente."], "c": 1, "img": "images/253.jpg"}, {"n": "254", "q": "A velocidade deve ser ajustada:", "opts": ["Apenas ao limite máximo permitido.", "Às condições da estrada e do trânsito.", "À vontade do condutor."], "c": 1, "img": null}, {"n": "255", "q": "Quando o piso está escorregadio, o motorista deve:", "opts": ["Travar bruscamente.", "Reduzir a velocidade e evitar manobras bruscas.", "Aumentar a velocidade."], "c": 1, "img": null}, {"n": "256", "q": "Quando a visibilidade é reduzida, para além de utilizar as luzes, deve:", "opts": ["Continuar com a mesma velocidade.", "Parar o veículo.", "Reduzir a velocidade e aumentar a distância para o veículo da frente."], "c": 2, "img": null}, {"n": "257", "q": "Quando a intensidade do trânsito aumenta, a velocidade deve:", "opts": ["Diminuir.", "Aumentar.", "Ser mantida."], "c": 0, "img": null}, {"n": "258", "q": "Ao circular neste local, o motorista deve:", "opts": ["Manter a velocidade sem preocupações.", "Aumentar um pouco a velocidade para evitar parar.", "Moderar a velocidade e parar se necessário."], "c": 2, "img": "images/258.jpg"}, {"n": "259", "q": "Qual a velocidade máxima permitida a um automóvel ligeiro, dentro de uma localidade?", "opts": ["50 km/h", "60 km/h", "90 km/h"], "c": 0, "img": null}, {"n": "260", "q": "Neste local, posso transitar a 50 Km/h?", "opts": ["Não, porque a sinalização vertical o proíbe.", "Sim, porque dentro das localidades esta é a velocidade mínima obrigatória.", "Sim, porque o pavimento está em boas condições."], "c": 0, "img": "images/260.jpg"}, {"n": "261", "q": "O que deve fazer perante um sinal de STOP?", "opts": ["Parar apenas se vier outro veículo.", "Parar obrigatoriamente antes de avançar.", "Reduzir a velocidade"], "c": 1, "img": "images/261.jpg"}, {"n": "262", "q": "Os sinais de proibição indicam:", "opts": ["Informações úteis.", "Obrigações a cumprir.", "Restrições ou limites."], "c": 2, "img": null}, {"n": "263", "q": "A sinalização existente obriga o motorista a seguir em frente?", "opts": ["Sim.", "Não."], "c": 1, "img": "images/263.jpg"}, {"n": "264", "q": "O sinal indica:", "opts": ["Estacionamento autorizado.", "Estacionamento proibido.", "Apenas paragem permitida."], "c": 0, "img": "images/264.jpg"}, {"n": "265", "q": "O sinal indica:", "opts": ["Passagem de peões", "A existência de um túnel.", "Entrada num parque de estacionamento."], "c": 1, "img": "images/265.jpg"}, {"n": "266", "q": "O sinal com luz amarela está intermitente, pelo que o motorista:", "opts": ["Deve parar.", "Deve acelerar.", "Pode passar, mas com cuidado."], "c": 2, "img": "images/266.jpg"}, {"n": "267", "q": "O que deve respeitar em primeiro lugar?", "opts": ["Os sinais luminosos.", "As marcas rodoviárias.", "As ordens da polícia."], "c": 2, "img": null}, {"n": "268", "q": "Os sinais verticais de obrigação são:", "opts": ["Circulares com fundo azul.", "Retangulares com fundo verde.", "Triangulares com borda vermelha."], "c": 0, "img": null}, {"n": "269", "q": "O que deve fazer perante este sinal?", "opts": ["Ceder a passagem a todos os veículos.", "Avançar em primeiro lugar.", "Manter a velocidade."], "c": 0, "img": "images/269.jpg"}, {"n": "274", "q": "Perante este sinal, o motorista deve:", "opts": ["Avançar em primeiro lugar.", "Ceder a passagem."], "c": 1, "img": "images/274.jpg"}, {"n": "275", "q": "Qualquer veículo que saia de uma passagem de nível deve:", "opts": ["Passar antes dos outros.", "Deixar os outros passarem primeiro.", "Parar em cima da passagem de nível."], "c": 0, "img": "images/275.jpg"}, {"n": "276", "q": "Ao encontrar este sinal, como deve proceder?", "opts": ["Ceder a passagem a todos os veículos que circulem na via em que vai entrar.", "Ceder a passagem apenas aos veículos vindos da direita.", "Ceder a passagem apenas aos veículos vindos da esquerda."], "c": 0, "img": "images/276.jpg"}, {"n": "277", "q": "Uma condução defensiva é:", "opts": ["Estar atento aos outros condutores, antecipando situações de risco.", "Conduzir sempre a alta velocidade."], "c": 0, "img": null}, {"n": "278", "q": "Ao conduzir à noite, o motorista deve:", "opts": ["Reduzir a velocidade apenas nas curvas.", "Manter os máximos ligados em todas as situações.", "Ver e ser visto, usando corretamente as luzes."], "c": 2, "img": null}, {"n": "279", "q": "O que deve fazer em condições de nevoeiro?", "opts": ["Usar as luzes de nevoeiro e ajustar a velocidade.", "Aumentar a velocidade para sair da área com nevoeiro.", "Manter as luzes desligadas para economizar energia."], "c": 0, "img": null}],
+  [{"n": "280", "q": "O que significa &#x27;manter a distância de segurança&#x27;?", "opts": ["Garantir a distância mínima entre veículos, de modo a evitar acidentes.", "Estar muito próximo do veículo da frente."], "c": 0, "img": null}, {"n": "281", "q": "O que significa &#x27;eco condução&#x27;?", "opts": ["Utilizar apenas veículos elétricos.", "Conduzir de forma eficiente, reduzindo o consumo de combustível e poluição.", "Manter a velocidade máxima para chegar rapidamente ao destino."], "c": 1, "img": null}, {"n": "282", "q": "Como deve proceder ao conduzir com neve ou gelo?", "opts": ["Aumentar a velocidade para evitar derrapagens.", "Travar bruscamente.", "Colocar correntes nos pneus e circular devagar."], "c": 2, "img": null}, {"n": "283", "q": "A correta pressão dos pneus contribui para uma condução mais económica.", "opts": ["Verdadeiro", "Falso"], "c": 0, "img": null}, {"n": "284", "q": "A condução sob a influência do álcool provoca no condutor a diminuição dos reflexos.", "opts": ["Falso", "Verdadeiro"], "c": 1, "img": null}, {"n": "285", "q": "O que deve fazer para diminuir as emissões de poluentes?", "opts": ["Conduzir com o motor a altas rotações.", "Fazer a manutenção regular do veículo.", "Andar sempre com o ar condicionado ligado."], "c": 1, "img": null}, {"n": "286", "q": "Um motorista de TVDE pode conduzir com uma taxa de alcoolemia de 0,2 g/l.", "opts": ["Sim, se estiver em boas condições físicas.", "Não.", "Sim, porque é um valor permitido."], "c": 1, "img": null}, {"n": "287", "q": "Conduzir com chuva tem como resultado:", "opts": ["Maior aderência dos pneus ao piso.", "A redução da visibilidade."], "c": 1, "img": null}, {"n": "288", "q": "O que deve fazer ao conduzir em zonas de vento forte?", "opts": ["Virar o volante no sentido contrário ao do vento.", "Aumentar a velocidade para atravessar a zona rapidamente.", "Reduzir a velocidade e manter firme o controlo do volante."], "c": 2, "img": null}, {"n": "289", "q": "A distância de travagem varia com:", "opts": ["As condições atmosféricas.", "A largura da via.", "A sinalização vertical existente no local."], "c": 0, "img": null}, {"n": "290", "q": "Qual é o prazo de validade do certificado de motorista TVDE?", "opts": ["3 anos", "5 anos", "10 anos"], "c": 1, "img": null}, {"n": "291", "q": "Qual é a lotação máxima permitida para veículos utilizados no serviço TVDE?", "opts": ["7 lugares, incluindo o motorista", "9 lugares, incluindo o motorista", "12 lugares, incluindo o motorista"], "c": 1, "img": null}, {"n": "292", "q": "O que é obrigatório para o transporte de passageiros com mobilidade reduzida?", "opts": ["Um veículo com capacidade para transportar cadeiras de rodas", "Um veículo elétrico ou híbrido", "Um motorista com formação adicional"], "c": 0, "img": null}, {"n": "293", "q": "O tempo máximo permitido para condução de motoristas TVDE é de 10 horas num período de 24 horas.", "opts": ["Verdadeiro", "Falso"], "c": 0, "img": null}, {"n": "294", "q": "Os serviços de TVDE podem ser pagos em dinheiro ou cartão de crédito.", "opts": ["Verdadeiro", "Falso"], "c": 1, "img": null}, {"n": "295", "q": "Qual é a idade máxima permitida para veículos utilizados no serviço TVDE?", "opts": ["5 anos", "10 anos.", "7 anos."], "c": 2, "img": null}, {"n": "304", "q": "Os veículos TVDE podem circular nas vias reservadas a transportes públicos:", "opts": ["Sim.", "Não."], "c": 1, "img": null}, {"n": "320", "q": "A que distância deve colocar o triângulo de pré-sinalização de perigo em caso de avaria?", "opts": ["Pelo menos 10 metros.", "Pelo menos 50 metros.", "Pelo menos 30 metros."], "c": 2, "img": null}, {"n": "321", "q": "O que deve fazer ao encontrar um acidente com vítimas?", "opts": ["Tentar resolver a situação sozinho.", "Garantir a segurança e ligar para o 112.", "Seguir a viagem, sem parar."], "c": 1, "img": null}, {"n": "322", "q": "Em que situação deve ligar para o número de emergência 112?", "opts": ["Para pedir informações de trânsito.", "Para chamar um reboque.", "Sempre que houver necessidade de assistência urgente."], "c": 2, "img": null}, {"n": "323", "q": "O que deve informar ao ligar para o 112, em caso de acidente?", "opts": ["Apenas o tipo de acidente.", "Localização exata, tipo de acidente e número de vítimas.", "A cor dos veículos envolvidos no acidente."], "c": 1, "img": null}, {"n": "324", "q": "O que deve fazer se houver um incêndio no motor do veículo?", "opts": ["Abrir o capot rapidamente e apagar as chamas com água.", "Usar o extintor e apontar à base das chamas.", "Esperar que o fogo se apague."], "c": 1, "img": null}, {"n": "325", "q": "O que deve fazer após utilizar um extintor?", "opts": ["Recarregá-lo ou substituí-lo por um novo.", "Guardá-lo no veículo, para a próxima utilização."], "c": 0, "img": null}, {"n": "326", "q": "Quando deve usar o colete retrorrefletor?", "opts": ["Sempre que sair do veículo para sinalizar ou reparar.", "Somente em locais com pouca visibilidade.", "Apenas em estradas movimentadas."], "c": 0, "img": null}, {"n": "327", "q": "No primeiro contacto com uma vítima de um acidente, o que deve fazer primeiro?", "opts": ["Verificar se respira e se tem pulsação.", "Retirar a vítima do veículo imediatamente.", "Procurar por ferimentos visíveis."], "c": 0, "img": null}, {"n": "328", "q": "Em caso de acidente com o seu veículo, deve:", "opts": ["Sair rapidamente do veículo sem avisar outros condutores.", "Garantir a segurança no local, sinalizar e ligar para o 112.", "Resolver a situação sozinho, sem pedir ajuda."], "c": 1, "img": null}, {"n": "329", "q": "Em caso de queimadura deve:", "opts": ["Lavar a zona afetada com água quente.", "Furar as bolhas existentes.", "Evitar tocar diretamente na área queimada."], "c": 2, "img": null}, {"n": "330", "q": "Para sinalizar corretamente o local de um acidente, o motorista deve:", "opts": ["Ligar as luzes de perigo, vestir o colete refletor e colocar o triângulo de pré-sinalização de perigo.", "Abandonar o local do acidente."], "c": 0, "img": null}, {"n": "331", "q": "Os princípios gerais do socorrismo são:", "opts": ["Prever, ajudar e socorrer.", "Parar, socorrer e alertar.", "Prevenir, alertar e socorrer."], "c": 2, "img": null}]
+];
+const MODULE_NAMES = ["Modulo 1","Modulo 2","Modulo 3"];
+const PASSWORD = "tvde2026";
+
+let state = { loggedIn:false, modIndex:null, answers:{}, submitted:false };
+
+function el(tag, attrs, html){
+  const e=document.createElement(tag);
+  if(attrs) for(const k in attrs) e.setAttribute(k, attrs[k]);
+  if(html!==undefined) e.innerHTML = html;
+  return e;
+}
+
+function render(){
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+  if(!state.loggedIn){ renderLogin(app); return; }
+  if(state.modIndex===null){ renderModuleSelect(app); return; }
+  renderQuiz(app);
+}
+
+function renderLogin(app){
+  const center = el('div',{class:'centerwrap'});
+  center.appendChild(el('h1',{style:'text-align:center;'},'Quiz TVDE - Login'));
+  center.appendChild(el('p',{class:'sub',style:'text-align:center;'},'Digite a senha para aceder aos 3 modulos de perguntas.'));
+  const card = el('div',{class:'card card-pad'});
+  const pw = el('input',{type:'password',id:'pw',placeholder:'Senha'});
+  card.appendChild(pw);
+  const err = el('div',{class:'err',id:'loginErr'});
+  card.appendChild(err);
+  const btn = el('button',{},'Entrar');
+  btn.onclick = () => {
+    if(pw.value === PASSWORD){
+      state.loggedIn = true;
+      render();
+    } else {
+      err.textContent = 'Senha incorreta. Tente novamente.';
+    }
+  };
+  pw.addEventListener('keydown', e=>{ if(e.key==='Enter') btn.click(); });
+  card.appendChild(btn);
+  center.appendChild(card);
+  app.appendChild(center);
+}
+
+function renderModuleSelect(app){
+  const center = el('div',{class:'centerwrap'});
+  center.appendChild(el('h1',{style:'text-align:center;'},'Escolha um Modulo'));
+  center.appendChild(el('p',{class:'sub',style:'text-align:center;'},'30 perguntas por modulo. Responda e clique em Submeter para ver o resultado.'));
+  const grid = el('div',{class:'modgrid'});
+  MODULES.forEach((m,i)=>{
+    const b = el('div',{class:'modbtn'});
+    b.appendChild(el('b',{},MODULE_NAMES[i]));
+    b.appendChild(el('span',{},m.length + ' perguntas'));
+    b.onclick = ()=>{ state.modIndex=i; state.answers={}; state.submitted=false; state.qIndex=0; render(); window.scrollTo(0,0); };
+    grid.appendChild(b);
+  });
+  center.appendChild(grid);
+  app.appendChild(center);
+}
+
+const LETTERS = ['A','B','C','D','E'];
+
+function renderQuestionCard(app, mod, i, reviewMode){
+  const q = mod[i];
+  const card = el('div',{class:'card'});
+
+  const head = el('div',{class:'qhead' + (q.img ? '' : ' qhead-noimg')});
+  if(q.img){
+    const wrap = el('div',{class:'qimgwrap'});
+    wrap.appendChild(el('img',{class:'qimg',src:q.img}));
+    head.appendChild(wrap);
+  }
+  const textcol = el('div',{class:'qtextcol'});
+  textcol.appendChild(el('span',{class:'qbadge'}, String(i+1)));
+  textcol.appendChild(el('p',{class:'qtext'}, q.q));
+  head.appendChild(textcol);
+  card.appendChild(head);
+
+  const opts = el('div',{class:'opts'});
+  q.opts.forEach((opt, oi)=>{
+    const chosen = state.answers[i];
+    let cls = 'opt';
+    if(reviewMode){
+      if(oi===q.c) cls += ' correct';
+      else if(oi===chosen) cls += ' wrong';
+    } else if(chosen===oi){
+      cls += ' selected';
+    }
+    const row = el('label',{class:cls});
+    const inp = el('input',{type:'radio',name:'q'+i});
+    inp.checked = (chosen===oi);
+    inp.disabled = reviewMode;
+    inp.onchange = ()=>{ state.answers[i]=oi; render(); };
+    row.appendChild(inp);
+    row.appendChild(el('span',{class:'optletter'}, LETTERS[oi] || '?'));
+    row.appendChild(el('span',{},opt));
+    if(reviewMode){
+      if(oi===q.c) row.appendChild(el('span',{class:'badge ok'},'Correta'));
+      else if(oi===chosen) row.appendChild(el('span',{class:'badge bad'},'Sua resposta'));
+    } else {
+      row.appendChild(el('span',{class:'checkbox'},'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'));
+    }
+    opts.appendChild(row);
+  });
+  card.appendChild(opts);
+  app.appendChild(card);
+}
+
+function renderQuiz(app){
+  const mod = MODULES[state.modIndex];
+  const top = el('div',{class:'topbar'});
+  const back = el('span',{class:'back'},'&larr; Modulos');
+  back.onclick = ()=>{ state.modIndex=null; render(); window.scrollTo(0,0); };
+  top.appendChild(back);
+  app.appendChild(top);
+  app.appendChild(el('h1',{},MODULE_NAMES[state.modIndex]));
+
+  if(state.submitted){
+    let correctCount = 0;
+    mod.forEach((q,i)=>{ if(state.answers[i]===q.c) correctCount++; });
+    const sc = el('div',{class:'card card-pad scorebox'});
+    sc.appendChild(el('div',{class:'big'}, correctCount + ' / ' + mod.length));
+    sc.appendChild(el('p',{class:'sub'},'respostas corretas - revisao completa abaixo'));
+    app.appendChild(sc);
+    mod.forEach((q,i)=>{ renderQuestionCard(app, mod, i, true); });
+    const retry = el('button',{class:'secondary'},'Refazer este modulo');
+    retry.onclick = ()=>{ state.answers={}; state.submitted=false; state.qIndex=0; render(); window.scrollTo(0,0); };
+    app.appendChild(retry);
+    return;
+  }
+
+  // one question at a time
+  const idx = state.qIndex || 0;
+  renderQuestionCard(app, mod, idx, false);
+
+  const nav = el('div',{class:'navrow'});
+  const prevBtn = el('button',{class:'nav-prev'},'&larr; Anterior');
+  prevBtn.disabled = (idx===0);
+  prevBtn.onclick = ()=>{ if(idx>0){ state.qIndex = idx-1; render(); window.scrollTo(0,0); } };
+  nav.appendChild(prevBtn);
+
+  if(idx < mod.length-1){
+    const nextBtn = el('button',{class:'nav-next'},'Seguinte &rarr;');
+    nextBtn.onclick = ()=>{ state.qIndex = idx+1; render(); window.scrollTo(0,0); };
+    nav.appendChild(nextBtn);
+  } else {
+    const subBtn = el('button',{class:'nav-next'},'Submeter');
+    subBtn.onclick = ()=>{ state.submitted = true; render(); window.scrollTo(0,0); };
+    nav.appendChild(subBtn);
+  }
+  app.appendChild(nav);
+
+  const grid = el('div',{class:'qgrid'});
+  mod.forEach((q,gi)=>{
+    const gb = el('button',{class:'qgridbtn' + (gi===idx?' current':'') + (state.answers[gi]!==undefined?' answered':'')}, String(gi+1));
+    gb.onclick = ()=>{ state.qIndex = gi; render(); window.scrollTo(0,0); };
+    grid.appendChild(gb);
+  });
+  app.appendChild(grid);
+}
+
+render();
+</script>
+</body>
+</html>
